@@ -4,6 +4,8 @@ import ydata_profiling
 import streamlit.components.v1 as components  # Import Streamlit
 import base64
 import os
+import time
+
 def get_binary_file_downloader_html(bin_file, file_label='File'):
     with open(bin_file, 'rb') as f:
         data = f.read()
@@ -35,11 +37,13 @@ if uploaded_file is not None:
 
 
     # descriptive statistics
-    prof = ydata_profiling.ProfileReport(dataframe, explorative=True, minimal=True)
-    output = prof.to_file('output.html', silent=True)
+    with st.spinner('Please Wait! Generating your report...'):
+        prof = ydata_profiling.ProfileReport(dataframe, explorative=True, minimal=True)
+        output = prof.to_file('output.html', silent=True)
 
     if st.button('Download Report'):
-        st.markdown(get_binary_file_downloader_html('output.html', 'HTML Report'), unsafe_allow_html=True)
+        with st.spinner('Please Wait! Generating download link of report...'):
+            st.markdown(get_binary_file_downloader_html('output.html', 'HTML Report'), unsafe_allow_html=True)
 
 
     #print(output)
