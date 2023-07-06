@@ -1,5 +1,4 @@
 streamlit
 pandas
 ydata_profiling
-base64
 os
