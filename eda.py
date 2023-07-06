@@ -1,31 +1,43 @@
 import streamlit as st
 import pandas as pd
 import ydata_profiling
+import streamlit.components.v1 as components  # Import Streamlit
+import base64
+import os
+def get_binary_file_downloader_html(bin_file, file_label='File'):
+    with open(bin_file, 'rb') as f:
+        data = f.read()
+    bin_str = base64.b64encode(data).decode()
+    href = f'<a href="data:application/octet-stream;base64,{bin_str}" download="{os.path.basename(bin_file)}">Download {file_label}</a>'
+    return href
 
 
 
 st.title('EDA Tool')
 uploaded_file = st.file_uploader("Choose a file", type=['csv', 'xlsx'])
 if uploaded_file is not None:
-    # To read file as bytes:
-    #bytes_data = uploaded_file.getvalue()
-    #st.write(bytes_data)
-
-    # To convert to a string based IO:
-    #stringio = StringIO(uploaded_file.getvalue().decode("utf-8"))
-    #st.write(stringio)
-
-    # To read file as string:
-    #string_data = stringio.read()
-    #st.write(string_data)
 
     # Can be used wherever a "file-like" object is accepted:
     dataframe = pd.read_csv(uploaded_file)
-    #st.write(dataframe)
+
 
     # descriptive statistics
     prof = ydata_profiling.ProfileReport(dataframe, explorative=True, minimal=True)
-    output = prof.to_file('output.html', silent=False)
+    output = prof.to_file('output.html', silent=True)
 
-    #st.write("check out this [link](%s)" % url)
-    #st.markdown("check out this [link](%s)" % url)
+    if st.button('Download Report'):
+        st.markdown(get_binary_file_downloader_html('output.html', 'HTML Report'), unsafe_allow_html=True)
+
+
+    #print(output)
+
+    path_to_html = "./output.html"
+    with open(path_to_html, 'r') as f:
+       html_data = f.read()
+
+    #print(html_data)
+
+    ## Show in webpage
+    st.header("View your Report Online")
+    st.components.v1.html(html_data, height=1000, scrolling=True)
+    # Render the h1 block, contained in a frame of size 200x200.
