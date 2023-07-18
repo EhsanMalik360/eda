@@ -6,6 +6,10 @@ import base64
 import os
 import time
 
+
+# Show the Streamlit app in the browser
+st.set_page_config(layout="wide")
+
 def get_binary_file_downloader_html(bin_file, file_label='File'):
     with open(bin_file, 'rb') as f:
         data = f.read()
