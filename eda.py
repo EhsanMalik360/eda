@@ -21,7 +21,7 @@ def get_binary_file_downloader_html(bin_file, file_label='File'):
 
 st.title('AIDeCipher')
 uploaded_file = st.file_uploader("Convert your CSVs to interactive reports", type=['csv', 'xlsx'])
-st.markdown('<style>.css-16idsys p{font-size: 20px;}.eex3ynb0{visibility: hidden;}.css-1gulkj5{height: 200px;background-color: #2125bae3;}.css-noeb3a{position: absolute;right: 480px;top: 165px;color: white;}.e1ewe7hr10{position: absolute;right: 450px;top: 45%;}.eqdbnj012{position: absolute;right: 425px;top: 28%;color: #ffffff;}.css-9ycgxx{margin-left:500px; color:#ffffff;}.css-noeb3a{right:575;}.css-1aehpvj{display: none;}</style>', unsafe_allow_html=True)
+st.markdown('<style>.css-16idsys p{font-size: 20px;}.eex3ynb0{visibility: hidden;}.css-1gulkj5{height: 200px;background-color: #2125bae3;}.css-noeb3a{position: absolute;right: 480px;top: 165px;color: white;}.e1ewe7hr10{position: absolute;right: 450px;top: 45%;}.eqdbnj012{position: absolute;right: 425px;top: 28%;color: #ffffff;}.css-9ycgxx{margin-left:500px; color:#ffffff;}.css-noeb3a{right:570;}.css-1aehpvj{display: none;}</style>', unsafe_allow_html=True)
 if uploaded_file is not None:
 
     filename=uploaded_file.name
