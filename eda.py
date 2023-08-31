@@ -31,7 +31,7 @@ if uploaded_file is not None:
         exit(1)
     filesize=uploaded_file.size
 
-
+#condition
     if (filesize>10000000):
         st.warning('File upload limit is 10 mb. Please upgrade to Premium for large files', icon="⚠️")
         exit(1)
